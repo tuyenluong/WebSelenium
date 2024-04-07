@@ -93,6 +93,17 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven.surfire.plugin.version}</version>
 				<configuration>
+					<properties>
+						<reportsDirectory>target/</reportsDirectory>
+						<workingDirectory>target/</workingDirectory>
+						<property>
+							<name>outputDirectory</name>
+							<value>target/</value>
+						</property>
+					</properties>
+					<environmentVariables>
+						<browserName>${browserName}</browserName>
+					</environmentVariables>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/execution/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
@@ -110,9 +121,6 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${maven.javadoc.plugin.version}</version>
 				<configuration>
-					<systemPropertyVariables>
-                    	<browserName>${browserName}</browserName>
-                	</systemPropertyVariables>
 				</configuration>
 			</plugin>
 		</plugins>
