@@ -16,9 +16,7 @@ public class SeleniumConfig {
                 chromeOptions.addArguments("--disable-infobars");
                 chromeOptions.addArguments("--start-maximized");
                 chromeOptions.addArguments("--disable-notifications");
-//                if(isHeadLess()){
-//                    chromeOptions.addArguments("--headless");
-//                }
+                chromeOptions.addArguments("--headless");
                 capabilities.setBrowserName("chrome");
                 capabilities.merge(chromeOptions);
                 return capabilities;
