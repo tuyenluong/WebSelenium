@@ -28,16 +28,16 @@ jobs:
         cache: maven
         
     - name: install wget 
-      run: apt install wget 
+      run: sudo apt install wget 
 
     - name: download chrome
-      run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      run: sudo wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
     - name: install chrome
-      run: dpkg -i google-chrome-stable_current_amd64.deb
+      run: sudo dpkg -i google-chrome-stable_current_amd64.deb
 
     - name: fix error
-      run: apt-get install -f
+      run: sudo apt-get install -f
         
     - name: Clen install and run test
       run: mvn install test -DbrowserName=chrome
