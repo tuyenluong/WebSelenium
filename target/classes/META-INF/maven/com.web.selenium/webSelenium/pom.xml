@@ -93,6 +93,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven.surfire.plugin.version}</version>
 				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+					</suiteXmlFiles>
 				</configuration>
 			</plugin>
 			<plugin>
