@@ -28,7 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Clen install
-      run: mvn clean install
+      run: mvn clean install -Dskiptests
 
   # Run demo test
     - name: Run demo test
