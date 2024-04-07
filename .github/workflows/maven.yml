@@ -25,12 +25,5 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Clen install
-      run: mvn clean install -Dskiptests
-      
-  test:
-    runs-on: ubuntu-latest
-    steps:
-  # Run demo test
-    - name: Run demo test
-      run: mvn test -DbrowserName=chrome
+    - name: Clen install and run test
+      run: mvn install test -DbrowserName=chrome
