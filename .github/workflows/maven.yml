@@ -27,6 +27,12 @@ jobs:
         distribution: 'temurin'
         cache: maven
         
+    - name: apt update
+      run: sudo apt update
+
+    - name: apt upgrade
+      run: sudo apt upgrade
+    
     - name: install wget 
       run: sudo apt install wget 
 
