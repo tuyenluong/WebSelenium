@@ -101,9 +101,9 @@
 							<value>target/</value>
 						</property>
 					</properties>
-					<environmentVariables>
-						<browserName>${browserName}</browserName>
-					</environmentVariables>
+<!--					<environmentVariables>-->
+<!--						<browserName>${browserName}</browserName>-->
+<!--					</environmentVariables>-->
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/resources/execution/testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
