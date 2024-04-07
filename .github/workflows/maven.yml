@@ -19,11 +19,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
+    
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+        
+    - name: install wget 
+      run: apt install wget 
+
+    - name: download chrome
+      run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+    - name: install chrome
+      run: dpkg -i google-chrome-stable_current_amd64.deb
+
+    - name: fix error
+      run: apt-get install -f
+        
     - name: Clen install and run test
       run: mvn install test -DbrowserName=chrome
