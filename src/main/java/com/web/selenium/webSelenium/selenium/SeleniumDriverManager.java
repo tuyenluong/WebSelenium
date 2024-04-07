@@ -7,6 +7,7 @@ import org.openqa.selenium.grid.Main;
 
 import com.web.selenium.webSelenium.driver.ImproveWebDriver;
 import com.web.selenium.webSelenium.driver.SessionManager;
+import com.web.selenium.webSelenium.selenium.SeleniumDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
