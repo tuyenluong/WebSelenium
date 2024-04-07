@@ -110,6 +110,9 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${maven.javadoc.plugin.version}</version>
 				<configuration>
+					<environmentVariables>
+                    	<browserName>${browserName}</browserName>
+                	</environmentVariables>
 				</configuration>
 			</plugin>
 		</plugins>
