@@ -17,6 +17,7 @@ public class testDemo {
 	@AfterTest
 	public void after(){
 		SessionManager.getWebDriver().quit();
+		SessionManager.removeThread();
 	}
 	
 	@Test

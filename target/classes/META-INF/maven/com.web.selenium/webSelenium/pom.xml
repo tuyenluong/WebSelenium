@@ -15,10 +15,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<selenium.version>4.19.1</selenium.version>
+		<selenium.grid.version>4.19.1</selenium.grid.version>
 		<testNG.version>7.9.0</testNG.version>
 		<javafaker.version>1.0.2</javafaker.version>
 		<slf4j.simple.version>2.0.12</slf4j.simple.version>
 		<slf4j.api.version>2.0.12</slf4j.api.version>
+		<webdrivermanager.version>5.8.0</webdrivermanager.version>
 		<maven.compiler.plugin.version>3.13.0</maven.compiler.plugin.version>
 		<maven.surfire.plugin.version>3.2.5</maven.surfire.plugin.version>
 		<maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
@@ -33,6 +35,13 @@
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-grid -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-grid</artifactId>
+			<version>${selenium.grid.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 		<dependency>
@@ -59,6 +68,15 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.api.version}</version>
 		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdrivermanager.version}</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>

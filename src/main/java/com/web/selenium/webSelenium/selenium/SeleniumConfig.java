@@ -7,7 +7,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class SeleniumConfig {
 	
-	private DesiredCapabilities capabilities;
+	private DesiredCapabilities capabilities  = new DesiredCapabilities();
 	
 	public DesiredCapabilities getCapabilities(String browserName){
         switch (browserName){
