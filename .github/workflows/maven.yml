@@ -16,9 +16,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 17
@@ -29,7 +27,10 @@ jobs:
         cache: maven
     - name: Clen install
       run: mvn clean install -Dskiptests
-
+      
+  test:
+    runs-on: ubuntu-latest
+    steps:
   # Run demo test
     - name: Run demo test
-      run: mvn test -DsuiteXmlFile=src/test/resources/execution/testng.xml
+      run: mvn test -DbrowserName=chrome
