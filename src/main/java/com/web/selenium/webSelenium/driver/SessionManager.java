@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 
 public class SessionManager {
 
-    private static final ThreadLocal<WebDriver> sessionDriver = new ThreadLocal<>();
+    private static final ThreadLocal<ImproveDriver> sessionDriver = new ThreadLocal<>();
 
-    public static WebDriver getWebDriver(){
+    public static ImproveDriver getWebDriver(){
         if(sessionDriver.get() == null){
             throw new RuntimeException("Web Driver is not instantiate yet !!!!!!");
         }
@@ -17,7 +17,7 @@ public class SessionManager {
         return sessionDriver.get() == null ? true : false;
     }
 
-    public static void putDriver(WebDriver driver){
+    public static void putDriver(ImproveDriver driver){
         sessionDriver.set(driver);
     }
 

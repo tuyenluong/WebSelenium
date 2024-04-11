@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
+import com.web.selenium.webSelenium.config.GlobalConfigBuilder;
 import com.web.selenium.webSelenium.driver.SessionManager;
 import com.web.selenium.webSelenium.selenium.SeleniumDriverManager;
 
@@ -17,6 +18,7 @@ public class testDemo {
 	
 	@BeforeTest
 	public void before(){
+		GlobalConfigBuilder.getInstace().getConfig();
 		SeleniumDriverManager.startWebDriver();
 	}
 	
@@ -28,6 +30,7 @@ public class testDemo {
 	
 	@Test
 	public void testDemo1() throws InterruptedException {
+		GlobalConfigBuilder.getInstace().getConfig().get("browserName");
 		SessionManager.getWebDriver().get("https://www.baeldung.com/maven-java-version");
 		SessionManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		SessionManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
