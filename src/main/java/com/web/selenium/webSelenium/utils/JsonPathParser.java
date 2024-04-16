@@ -1,19 +1,24 @@
 package com.web.selenium.webSelenium.utils;
 
-import com.jayway.jsonpath.Configuration;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.spi.json.JacksonJsonProvider;
 
 public class JsonPathParser {
 	
 	private DocumentContext data;
 	
-	public void parser(String path) {
-		Configuration configuration = Configuration.builder()
-	             .jsonProvider(new JacksonJsonProvider())
-	             .build();
-		this.data = JsonPath.using(configuration).parse(path);
+	public void parser(String filePath) {
+		try {
+			String json = new String(Files.readAllBytes(Paths.get(filePath)));
+			this.data = JsonPath.parse(json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String getData(String query) {
