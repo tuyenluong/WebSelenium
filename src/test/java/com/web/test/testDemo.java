@@ -8,6 +8,9 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
+import com.web.selenium.webSelenium.data.DataMapper;
+import com.web.selenium.webSelenium.data.InjectData;
+import com.web.selenium.webSelenium.api.data.WebDataMapper;
 import com.web.selenium.webSelenium.config.GlobalConfigBuilder;
 import com.web.selenium.webSelenium.driver.SessionManager;
 import com.web.selenium.webSelenium.selenium.SeleniumDriverManager;
@@ -28,10 +31,11 @@ public class testDemo {
 		SessionManager.removeThread();
 	}
 	
+	@InjectData(jsonPath = "./data/test.json")
 	@Test
 	public void testDemo1() throws InterruptedException {
 		GlobalConfigBuilder.getInstace().getConfig().get("browserName");
-		SessionManager.getWebDriver().get("https://www.baeldung.com/maven-java-version");
+		SessionManager.getWebDriver().get(WebDataMapper.mapData("#url"));
 		SessionManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		SessionManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
 		SessionManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));

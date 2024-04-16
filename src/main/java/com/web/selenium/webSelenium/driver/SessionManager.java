@@ -20,9 +20,15 @@ public class SessionManager {
     public static void putDriver(ImproveDriver driver){
         sessionDriver.set(driver);
     }
+    
+    public static void removeDriver(){
+        sessionDriver.remove();
+    }
 
     public static void removeThread(){
         sessionDriver.remove();
     }
+    
+    
     
 }
