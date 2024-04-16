@@ -1,6 +1,6 @@
 package com.web.selenium.webSelenium.data;
 
-import com.web.selenium.webSelenium.utils.fileTypes.JsonParser;
+import com.web.selenium.webSelenium.utils.JsonParser;
 
 public class DataMapper {
 

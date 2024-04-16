@@ -1,4 +1,4 @@
-package com.web.selenium.webSelenium.utils.fileTypes;
+package com.web.selenium.webSelenium.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
