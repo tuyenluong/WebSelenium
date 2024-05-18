@@ -9,13 +9,4 @@ public interface ImproveDriver extends WebDriver {
 	void setDataMapper(DataMapper obj);
 
     DataMapper getDataMapper();
-
-//    void setGlobalConfig(GlobalConfig obj);
-//
-//    GlobalConfig getGlobalConfig();
-
-//    void setExtentTest(ExtentTest obj);
-//
-//    ExtentTest getExtentTest();
-
 }

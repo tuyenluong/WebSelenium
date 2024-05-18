@@ -1,4 +1,4 @@
-package pageUi;
+package com.web.page.pageUi;
 
 
 public class HomePageUI{

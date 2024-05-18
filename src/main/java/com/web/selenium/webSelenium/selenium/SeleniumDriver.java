@@ -26,16 +26,4 @@ public class SeleniumDriver extends RemoteWebDriver implements ImproveDriver{
 	public DataMapper getDataMapper() {
 		return dataMapper;
 	}
-//
-//	@Override
-//	public void setGlobalConfig(GlobalConfig obj) {
-//		// TODO Auto-generated method stub
-//		
-//	}
-//
-//	@Override
-//	public GlobalConfig getGlobalConfig() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 }

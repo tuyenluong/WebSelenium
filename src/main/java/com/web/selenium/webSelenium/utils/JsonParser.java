@@ -1,6 +1,8 @@
 package com.web.selenium.webSelenium.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,8 +20,21 @@ public class JsonParser < T > {
             byte[] bytes = Files.readAllBytes(Paths.get(path));
             value= mapper.readValue(bytes,clazz);
         } catch (IOException e) {
-            //Tracer.printStackTrace(JsonParser.class,e.getMessage());
+        	// TODO Auto-generated catch block
+        	e.printStackTrace();
         }
         return value;
     }
+    
+	public DocumentContext jsonPathParser(String path) {
+		DocumentContext document = null;
+		try {
+			String json = new String(Files.readAllBytes(Paths.get(path)));
+			document = JsonPath.parse(json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return document;
+	}
 }

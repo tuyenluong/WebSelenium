@@ -18,6 +18,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class SeleniumDriverManager {
 	
+	
+	
 	public static void startWebDriver() {
 		String remoteHub ;
 		if(Boolean.valueOf(GlobalConfigBuilder.getInstace().getConfig().get("isLocalExecution"))) {
@@ -29,18 +31,9 @@ public class SeleniumDriverManager {
     }
 	
 	private static String lanuchLocalGrid(){
-		final String s = System.getProperty("user.dir") + "/src/test/resources/drivers/";
-		WebDriverManager.chromedriver().cachePath(s).avoidTmpFolder().setup();
-        WebDriverManager.edgedriver().cachePath(s).avoidTmpFolder().setup();
-        WebDriverManager.firefoxdriver().cachePath(s).avoidTmpFolder().setup();
-		try {
-			Main.main(new String[] { "standalone", "--port", "4444", "--override-max-sessions", "true", "--max-sessions", "10", "--session-timeout", "700" });
-	        Thread.sleep(2000L);
-		}catch(InterruptedException a) {
-			a.printStackTrace();
-		}
 		return "http://localhost:4444";
     }
+	
 	
 	private static ImproveDriver initWebDriver(String hub){
 		ImproveDriver driver = null;

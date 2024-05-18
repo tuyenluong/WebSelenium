@@ -14,6 +14,6 @@ public class WebDataMapper  {
     	SessionManager.getWebDriver().getDataMapper().setValue(key, input);
     }
     public static String queryData(String query) {
-    	return SessionManager.getWebDriver().getDataMapper().mapValue(query);
+    	return SessionManager.getWebDriver().getDataMapper().queryData(query);
     }
 }

@@ -1,6 +1,5 @@
 package com.web.selenium.webSelenium.driver;
 
-import org.openqa.selenium.WebDriver;
 
 public class SessionManager {
 
