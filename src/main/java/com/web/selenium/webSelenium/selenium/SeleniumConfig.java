@@ -14,7 +14,7 @@ public class SeleniumConfig {
 	private DesiredCapabilities capabilities = new DesiredCapabilities();
 	
 	public boolean isHealess() {
-		return Boolean.valueOf(GlobalConfigBuilder.getInstace().getConfig().get("isHeadLess"));
+		return Boolean.valueOf(SessionManager.getSesson().getGlobalConfig().get("isHeadLess"));
 	}
 	
 	public ChromeOptions getChromeOptions() {

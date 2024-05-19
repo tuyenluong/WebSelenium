@@ -1,21 +1,30 @@
 package com.web.test;
 
 import java.time.Duration;
+import java.util.List;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.Assertion;
 
 import com.web.selenium.webSelenium.data.DataMapper;
-import com.web.page.pageUi.HomePageUI;
+import com.web.page.pageObject.HomePageObject;
+import com.web.page.pageUi.HomePageElements;
+import com.web.selenium.webSelenium.api.action.WaitManager;
 import com.web.selenium.webSelenium.api.data.DataManager;
 import com.web.selenium.webSelenium.api.driver.DriverManager;
+import com.web.selenium.webSelenium.api.element.EnhancedElement;
 import com.web.selenium.webSelenium.config.GlobalConfigBuilder;
 import com.web.selenium.webSelenium.driver.SessionManager;
 import com.web.selenium.webSelenium.driver.SessionService;
+import com.web.selenium.webSelenium.enums.Locator;
 
 public class testDemo {
 	
@@ -23,16 +32,17 @@ public class testDemo {
 	private void beforeSuite() {
 		SessionManager.setSesson(new SessionService());
 		SessionManager.getSesson().setGlobalConfig(GlobalConfigBuilder.getInstace().getConfig());
+		DriverManager.launchGridLocal();
 	}
 	
 	@BeforeMethod
-	public void before(){
+	public void beforeMethod(){
 		DriverManager.startDriver();
 		
 		// Setup data
 		String testData = System.getProperty("user.dir")+ "\\src\\test\\java\\com\\web\\data\\test.json";
 		DataMapper data = new DataMapper(testData,"fr");
-		SessionManager.getSesson().setDataMapper(data);
+		SessionManager.getSesson().getEnhancedDriver().setDataMapper(data);
 	}
 	
 	@Test
@@ -40,11 +50,9 @@ public class testDemo {
 		//Use Dynamic data to query
 		String url = DataManager.queryData("$.fr.url");
 		//Test
-		DriverManager.getWebDriver().navigate().to(url);
-		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		DriverManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
-		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-		boolean status = SessionManager.getSesson().getWebDriver().findElement(By.xpath(HomePageUI.LBL_H4)).isEnabled();
+		DriverManager.getEnhancedDriver().navigate().to(url);
+		WaitManager.waitForElementVisibility(HomePageElements.BtnLogo, 10);
+		boolean status = HomePageElements.BtnLogo.isEnabled();
 		new Assertion().assertEquals(status, true);
 	}
 	
@@ -53,19 +61,49 @@ public class testDemo {
 		//Used data in fix structure
 		String url = DataManager.mapData("url");
 		//Test
-		DriverManager.getWebDriver().navigate().to(url);
-		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		DriverManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
-		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-		boolean status = SessionManager.getSesson().getWebDriver().findElement(By.xpath(HomePageUI.LBL_H4)).isEnabled();
+		DriverManager.getEnhancedDriver().navigate().to(url);
+		WaitManager.waitForElementVisibility(HomePageElements.BtnLogo, 10);
+		boolean status = HomePageElements.BtnLogo.isEnabled();
 		new Assertion().assertEquals(status, true);
+	}
+	
+	@Test
+	public void testDemoFeatureinit() throws InterruptedException {
+		DriverManager.getEnhancedDriver().get("https://www.boursakuwait.com.kw/en/participants/participants/listed-companies");
+		EnhancedElement btn_financialData = EnhancedElement.init("(//*[@id='/en/stock/financial-data/income-statement-pill'])[1]", Locator.xpath);
+		EnhancedElement tab_incomeStatement = EnhancedElement.init("(//*[@id='/en/stock/financial-data/income-statement-pill'])[2]", Locator.xpath);
+		EnhancedElement tab_balanceSheet = EnhancedElement.init("//*[@id='/en/stock/financial-data/balance-sheet-pill']", Locator.xpath);
+		EnhancedElement tab_cashFlow = EnhancedElement.init("//*[@id='/en/stock/financial-data/cash-flow-statement-pill']", Locator.xpath);
+		EnhancedElement list_ofBanks = EnhancedElement.init("//tr[@class='sc-fzpkqZ QaPvo']/td/a", Locator.xpath);
+		EnhancedElement list_sheetTable = EnhancedElement.init("//tr[contains(@class,'sc-fzpkqZ')]", Locator.xpath);
+		System.out.println("The EnhancedElement class will hold the key and the locator and only init the WebElement untill the user call the element action");
+		System.out.println(btn_financialData.getKey());
+		System.out.println(btn_financialData.getLocator());
+		System.out.println(tab_cashFlow.getKey());
+		System.out.println(tab_cashFlow.getLocator());
+		System.out.println(list_sheetTable.getKey());
+		System.out.println(list_sheetTable.getLocator());
+		System.out.println(tab_balanceSheet.getKey());
+		System.out.println(tab_balanceSheet.getLocator());
+		System.out.println(list_ofBanks.getKey());
+		System.out.println(list_ofBanks.getLocator());
+		System.out.println(tab_incomeStatement.getKey());
+		System.out.println(tab_incomeStatement.getLocator());
+	}
+	
+	@Test
+	public void testDemoFPageObject() throws InterruptedException {
+		HomePageObject.getInstance().openBanksURL().getBanksSheetTable();
 	}
 	
 	
 	@AfterMethod
-	public void after(){
-		DriverManager.getWebDriver().quit();
+	public void afterMethod(){
+		SessionManager.getSesson().getEnhancedDriver().quit();
+	}
+	
+	@AfterSuite
+	public void afterSuite(){
 		SessionManager.removeThread();
 	}
-
 }

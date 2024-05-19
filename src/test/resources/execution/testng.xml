@@ -3,10 +3,11 @@
 <suite name="Suite">
 	<parameter name="config" value="configfile.json"></parameter>
   <test thread-count="5" name="Test">
-	  <parameter name="browserMode" value="desktop"></parameter>
-	  <parameter name="language" value="fr"></parameter>
     <classes>
-      <class name="com.web.test.testDemo"/>
+      <class name="com.web.test.testDemo">
+      	<methods>
+      		<include name="testDemoFPageObject"></include></methods>
+      </class>
     </classes>
   </test> 
 </suite> 

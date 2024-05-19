@@ -6,8 +6,8 @@ import com.web.selenium.webSelenium.driver.SessionManager;
 public class ConfigManager {
 	
 
-    public static void getConfig(String config){
-        SessionManager.getSesson().getGlobalConfig().get(config);
+    public static String getConfig(String config){
+        return SessionManager.getSesson().getGlobalConfig().get(config);
     }
 
     public static void setConfig(String key, String value){
