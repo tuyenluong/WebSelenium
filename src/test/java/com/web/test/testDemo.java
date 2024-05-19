@@ -70,7 +70,7 @@ public class testDemo {
 		EnhancedElement tab_cashFlow = EnhancedElement.init("//*[@id='/en/stock/financial-data/cash-flow-statement-pill']", Locator.xpath);
 		EnhancedElement list_ofBanks = EnhancedElement.init("//tr[@class='sc-fzpkqZ QaPvo']/td/a", Locator.xpath);
 		EnhancedElement list_sheetTable = EnhancedElement.init("//tr[contains(@class,'sc-fzpkqZ')]", Locator.xpath);
-		System.out.println("The EnhancedElement class will hold the key and the locator and only init the WebElement untill the user call the element action");
+		System.out.println("The EnhancedElement class will hold the key and the locator and only init the WebElement when the user call the element action");
 		System.out.println(btn_financialData.getKey());
 		System.out.println(btn_financialData.getLocator());
 		System.out.println(tab_cashFlow.getKey());
