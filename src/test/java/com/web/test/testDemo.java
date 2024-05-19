@@ -3,7 +3,6 @@ package com.web.test;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.grid.Main;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeMethod;
@@ -12,73 +11,60 @@ import org.testng.asserts.Assertion;
 
 import com.web.selenium.webSelenium.data.DataMapper;
 import com.web.page.pageUi.HomePageUI;
-import com.web.selenium.webSelenium.api.data.WebDataMapper;
+import com.web.selenium.webSelenium.api.data.DataManager;
+import com.web.selenium.webSelenium.api.driver.DriverManager;
 import com.web.selenium.webSelenium.config.GlobalConfigBuilder;
 import com.web.selenium.webSelenium.driver.SessionManager;
-import com.web.selenium.webSelenium.selenium.SeleniumDriverManager;
-
-
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.web.selenium.webSelenium.driver.SessionService;
 
 public class testDemo {
 	
 	@BeforeSuite
-	private void initGrid() {
-		GlobalConfigBuilder.getInstace();
-		if(Boolean.valueOf(GlobalConfigBuilder.getInstace().getConfig().get("isLocalExecution"))) {
-			final String s = System.getProperty("user.dir") + "/src/test/resources/drivers/";
-			WebDriverManager.chromedriver().cachePath(s).avoidTmpFolder().setup();
-	        WebDriverManager.edgedriver().cachePath(s).avoidTmpFolder().setup();
-	        WebDriverManager.firefoxdriver().cachePath(s).avoidTmpFolder().setup();
-			try {
-				Main.main(new String[] { "standalone", "--port", "4444", "--override-max-sessions", "true", "--max-sessions", "10", "--session-timeout", "700" });
-		        Thread.sleep(2000L);
-			}catch(InterruptedException a) {
-				a.printStackTrace();
-			}
-		}
+	private void beforeSuite() {
+		SessionManager.setSesson(new SessionService());
+		SessionManager.getSesson().setGlobalConfig(GlobalConfigBuilder.getInstace().getConfig());
 	}
 	
 	@BeforeMethod
 	public void before(){
-		SeleniumDriverManager.startWebDriver();
+		DriverManager.startDriver();
 		
 		// Setup data
 		String testData = System.getProperty("user.dir")+ "\\src\\test\\java\\com\\web\\data\\test.json";
 		DataMapper data = new DataMapper(testData,"fr");
-		SessionManager.getWebDriver().setDataMapper(data);
+		SessionManager.getSesson().setDataMapper(data);
 	}
 	
 	@Test
 	public void testDemoDataInDynamicStructure() throws InterruptedException {
 		//Use Dynamic data to query
-		String url = WebDataMapper.queryData("$.fr.url");
+		String url = DataManager.queryData("$.fr.url");
 		//Test
-		SessionManager.getWebDriver().navigate().to(url);
-		SessionManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		SessionManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
-		SessionManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-		boolean status = SessionManager.getWebDriver().findElement(By.xpath(HomePageUI.LBL_H4)).isEnabled();
+		DriverManager.getWebDriver().navigate().to(url);
+		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		DriverManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
+		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		boolean status = SessionManager.getSesson().getWebDriver().findElement(By.xpath(HomePageUI.LBL_H4)).isEnabled();
 		new Assertion().assertEquals(status, true);
 	}
 	
 	@Test
 	public void testDemoDataInFixStructure() throws InterruptedException {
 		//Used data in fix structure
-		String url = WebDataMapper.mapData("url");
+		String url = DataManager.mapData("url");
 		//Test
-		SessionManager.getWebDriver().navigate().to(url);
-		SessionManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-		SessionManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
-		SessionManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-		boolean status = SessionManager.getWebDriver().findElement(By.xpath(HomePageUI.LBL_H4)).isEnabled();
+		DriverManager.getWebDriver().navigate().to(url);
+		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		DriverManager.getWebDriver().findElement(By.xpath(HomePageUI.BTN_MENU)).click();
+		DriverManager.getWebDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		boolean status = SessionManager.getSesson().getWebDriver().findElement(By.xpath(HomePageUI.LBL_H4)).isEnabled();
 		new Assertion().assertEquals(status, true);
 	}
 	
 	
 	@AfterMethod
 	public void after(){
-		SessionManager.getWebDriver().quit();
+		DriverManager.getWebDriver().quit();
 		SessionManager.removeThread();
 	}
 
