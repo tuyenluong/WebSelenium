@@ -33,7 +33,7 @@ public class EnhancedElement extends AbstractElement implements EnhancedElementI
 	
 	public void scrollToElement(){
         JavascriptExecutor jsExecutor = (JavascriptExecutor) SessionManager.getSesson().getEnhancedDriver();
-        jsExecutor.executeScript("arguments[0].scrollIntoView({ behavior: \"instant\", block: \"center\", inline: \"nearest\" });",  this.findElement());
+        jsExecutor.executeScript("arguments[0].scrollIntoView({ behavior: \"instant\", block: \"center\", inline: \"nearest\" });", this.findElement());
     }
 	public boolean waitForElementVisibility(long seconds){
 		return new WebDriverWait(SessionManager.getSesson().getEnhancedDriver(), Duration.ofSeconds(seconds))

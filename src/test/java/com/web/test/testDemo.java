@@ -1,12 +1,5 @@
 package com.web.test;
 
-import java.time.Duration;
-import java.util.List;
-
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -17,7 +10,6 @@ import org.testng.asserts.Assertion;
 import com.web.selenium.webSelenium.data.DataMapper;
 import com.web.page.pageObject.HomePageObject;
 import com.web.page.pageUi.HomePageElements;
-import com.web.selenium.webSelenium.api.action.WaitManager;
 import com.web.selenium.webSelenium.api.data.DataManager;
 import com.web.selenium.webSelenium.api.driver.DriverManager;
 import com.web.selenium.webSelenium.api.element.EnhancedElement;
@@ -30,8 +22,10 @@ public class testDemo {
 	
 	@BeforeSuite
 	private void beforeSuite() {
+		// Init Session
 		SessionManager.setSesson(new SessionService());
 		SessionManager.getSesson().setGlobalConfig(GlobalConfigBuilder.getInstace().getConfig());
+		// Launch local grid with localhost:4444
 		DriverManager.launchGridLocal();
 	}
 	
@@ -51,7 +45,7 @@ public class testDemo {
 		String url = DataManager.queryData("$.fr.url");
 		//Test
 		DriverManager.getEnhancedDriver().navigate().to(url);
-		WaitManager.waitForElementVisibility(HomePageElements.BtnLogo, 10);
+		HomePageElements.BtnLogo.waitForElementToBePresent(10);
 		boolean status = HomePageElements.BtnLogo.isEnabled();
 		new Assertion().assertEquals(status, true);
 	}
@@ -62,7 +56,7 @@ public class testDemo {
 		String url = DataManager.mapData("url");
 		//Test
 		DriverManager.getEnhancedDriver().navigate().to(url);
-		WaitManager.waitForElementVisibility(HomePageElements.BtnLogo, 10);
+		HomePageElements.BtnLogo.waitForElementToBePresent(10);
 		boolean status = HomePageElements.BtnLogo.isEnabled();
 		new Assertion().assertEquals(status, true);
 	}
