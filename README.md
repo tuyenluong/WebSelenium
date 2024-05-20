@@ -12,5 +12,9 @@ Core feature:
 	- **Extent Report** (*TBC*)
 - **Enhanced Element**
 	- Implemented the Web Element interface
+	- ![image](https://github.com/tuyenluong/WebSelenium/assets/76527250/033f7a42-d629-410c-9536-a0c55bf37f5e)
 	- Provided lazy Init mechanism, only Init Web Element when the user call one of the actions.
+	- ![image](https://github.com/tuyenluong/WebSelenium/assets/76527250/b797b346-ce2f-41dc-83eb-b2d2012cca8a)
 	- Handled most exception when interact with the Web Element at Init . Example: `NoSuchElementException`, `StaleElementReferenceException`, `ElementNotInteractableException`, `TimeoutException`.
+	- ![image](https://github.com/tuyenluong/WebSelenium/assets/76527250/a11a1608-b093-472e-9263-b024bbdde368)
+ 	
