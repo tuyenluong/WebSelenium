@@ -4,7 +4,7 @@
 name: Maven Package
 
 on:
-  release:
+  issue_comment:
     types: [edited]
 
 jobs:
