@@ -1,4 +1,4 @@
-# Hybrid Automation Framework
+# Hybrid Automation Frameworks
 
 Core feature:
 - **Session Manager** manage entire testing runtime process, it manage the **Enhanced Driver** and **Global Config**
