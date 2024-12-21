@@ -1,6 +1,9 @@
 # Hybrid Automation Framework
 
 Core feature:
+
+![Uploading Selenium - Java framework.png…]()
+
 - **Session Manager** manage entire testing runtime process, it manage the **Enhanced Driver** and **Global Config**
 - **Enhanced Driver**:
 	- **Enhanced Driver** has implemented the Web Driver interface, which will allow it to add more new characteristics related to the Web Driver (*Such as Data Mapper, Report*) and manage it within the context of the current driver.
