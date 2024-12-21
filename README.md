@@ -2,7 +2,7 @@
 
 Core feature:
 
-![Uploading Selenium - Java framework.png…]()
+![Selenium - Java framework](https://github.com/user-attachments/assets/df39e156-4b26-4daa-9fed-f063335cd1a8)
 
 - **Session Manager** manage entire testing runtime process, it manage the **Enhanced Driver** and **Global Config**
 - **Enhanced Driver**:
