@@ -1,20 +1,25 @@
 package com.web.selenium.webSelenium.selenium;
 
+import com.web.selenium.webSelenium.annotation.common.InitObject;
+import com.web.selenium.webSelenium.annotation.common.InjectObject;
+import com.web.selenium.webSelenium.api.config.GlobalConfig;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import com.web.selenium.webSelenium.config.GlobalConfigBuilder;
-import com.web.selenium.webSelenium.driver.SessionManager;
 import com.web.selenium.webSelenium.enums.Browsers;
 
 public class SeleniumConfig {
 
+	@InjectObject
+	private GlobalConfig globalConfig;
+
+	@InitObject
 	private DesiredCapabilities capabilities = new DesiredCapabilities();
 	
-	public boolean isHealess() {
-		return Boolean.valueOf(SessionManager.getSesson().getGlobalConfig().get("isHeadLess"));
+	public boolean isHeadless() {
+		return Boolean.parseBoolean(globalConfig.get("--headless"));
 	}
 	
 	public ChromeOptions getChromeOptions() {
@@ -22,7 +27,7 @@ public class SeleniumConfig {
 		chromeOptions.addArguments("--disable-infobars");
 		chromeOptions.addArguments("--start-maximized");
 		chromeOptions.addArguments("--disable-notifications");
-		if (isHealess()) {
+		if (isHeadless()) {
 			chromeOptions.addArguments("--headless");
 		}
 		return chromeOptions;
@@ -33,7 +38,7 @@ public class SeleniumConfig {
 		firefoxOptions.addArguments("--disable-infobars");
 		firefoxOptions.addArguments("--start-maximized");
 		firefoxOptions.addArguments("--disable-notifications");
-		if (isHealess()) {
+		if (isHeadless()) {
 			firefoxOptions.addArguments("--headless");
 		}
 		return firefoxOptions;
@@ -44,7 +49,7 @@ public class SeleniumConfig {
 		edgeOptions.addArguments("--disable-infobars");
 		edgeOptions.addArguments("--start-maximized");
 		edgeOptions.addArguments("--disable-notifications");
-		if (isHealess()) {
+		if (isHeadless()) {
 			edgeOptions.addArguments("--headless");
 		}
 		return edgeOptions;

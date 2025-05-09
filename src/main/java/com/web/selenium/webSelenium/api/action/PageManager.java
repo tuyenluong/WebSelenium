@@ -2,13 +2,16 @@ package com.web.selenium.webSelenium.api.action;
 
 import java.time.Duration;
 
+import com.web.selenium.webSelenium.annotation.inject.InjectDriver;
+import com.web.selenium.webSelenium.api.driver.EnhancedDriver;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.web.selenium.webSelenium.api.driver.DriverManager;
-
 public abstract class PageManager {
+
+    @InjectDriver
+    private EnhancedDriver enhancedDriver;
 	
 	public PageManager() {
 		waitForPageToLoad();
@@ -21,7 +24,7 @@ public abstract class PageManager {
 	}
 	private void waitForJQuerySuccess() {
         explicitWait = initWebDriverWait(30);
-        jsExecutor = (JavascriptExecutor) DriverManager.getEnhancedDriver();
+        jsExecutor = (JavascriptExecutor) enhancedDriver;
 
         ExpectedCondition<Boolean> jQueryLoad = driver12 -> {
             try {
@@ -37,7 +40,7 @@ public abstract class PageManager {
     }
 	private void waitForJSLoadSuccess() {
         explicitWait = initWebDriverWait(30);
-        jsExecutor = (JavascriptExecutor) DriverManager.getEnhancedDriver();
+        jsExecutor = (JavascriptExecutor) enhancedDriver;
         ExpectedCondition<Boolean> jsLoad =
                 driver1 -> jsExecutor.executeScript("return document.readyState").toString().equals("complete");
         try {
@@ -46,14 +49,14 @@ public abstract class PageManager {
         }
     }
 	private boolean isAngular(){
-        jsExecutor = (JavascriptExecutor) DriverManager.getEnhancedDriver();
+        jsExecutor = (JavascriptExecutor) enhancedDriver;
         boolean status = (boolean) jsExecutor.executeScript("return window.angular ? true : false");
         return status;
     }
 	private void waitForAngularLoad() {
         if(isAngular()){
             explicitWait = initWebDriverWait(20);
-            JavascriptExecutor js = (JavascriptExecutor) DriverManager.getEnhancedDriver();
+            JavascriptExecutor js = (JavascriptExecutor) enhancedDriver;
             final String angularReadyScript = "return angular.element(document).injector().get('$http').pendingRequests.length === 0";
             //Wait for ANGULAR to load
             ExpectedCondition<Boolean> angularLoad = driver -> {
@@ -75,7 +78,7 @@ public abstract class PageManager {
         }
     }
     private WebDriverWait initWebDriverWait(int seconds){
-        return new WebDriverWait(DriverManager.getEnhancedDriver(), Duration.ofSeconds(seconds));
+        return new WebDriverWait(enhancedDriver, Duration.ofSeconds(seconds));
     }
     JavascriptExecutor jsExecutor;
     WebDriverWait explicitWait;

@@ -1,18 +1,32 @@
 package com.web.selenium.webSelenium.driver;
 
+import java.net.URL;
 
-import org.openqa.selenium.WebDriver;
+import com.web.selenium.webSelenium.annotation.common.InitObject;
+import com.web.selenium.webSelenium.api.driver.EnhancedDriver;
+import lombok.Data;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.web.selenium.webSelenium.data.DataMapper;
 
-public interface EnhancedDriverImp extends WebDriver{
+@Data
+@InitObject
+public class EnhancedDriverImp extends RemoteWebDriver implements EnhancedDriver {
 	
-	void setDataMapper(DataMapper obj);
+	private DataMapper dataMapper;
 
-    DataMapper getDataMapper();
+	public EnhancedDriverImp(URL url, DesiredCapabilities cap) {
+		super(url, cap);
+	}
 
-//    void setExtentTest(ExtentTest obj);
-//
-//    ExtentTest getExtentTest();
+	@Override
+	public void openURL(String url) {
+		this.get(url);
+	}
 
+	@Override
+	public void quitBrowser() {
+		this.quit();
+	}
 }

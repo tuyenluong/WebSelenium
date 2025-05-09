@@ -2,11 +2,14 @@ package com.web.selenium.webSelenium.config;
 
 import java.util.Objects;
 
+import com.web.selenium.webSelenium.annotation.common.InjectObject;
+import com.web.selenium.webSelenium.api.config.GlobalConfig;
 import com.web.selenium.webSelenium.utils.PropertiesFileReader;
 
 
 public class GlobalConfigBuilder {
-	
+
+	@InjectObject
 	private GlobalConfig config;
 	private static GlobalConfigBuilder configBuilder;
 	
@@ -21,7 +24,6 @@ public class GlobalConfigBuilder {
 	}
 	
 	private GlobalConfigBuilder(String path) {
-        config = new GlobalConfig();
         if(path == null | Objects.equals(path, "")){
             path = GlobalConstants.CHROME_CONFIG;
         }else {
@@ -31,15 +33,13 @@ public class GlobalConfigBuilder {
         reader.reader(path);
         
         for (final String name: reader.getProp().stringPropertyNames()) {
-        	config.put(name, reader.getProp().getProperty(name));
+			getConfig().put(name, reader.getProp().getProperty(name));
         }
     }
-	
-	
+
 	public GlobalConfig getConfig() {
 		return config;
 	}
-
 	public void setConfig(GlobalConfig config) {
 		this.config = config;
 	}
