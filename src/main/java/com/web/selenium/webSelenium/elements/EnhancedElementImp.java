@@ -18,15 +18,21 @@ public class EnhancedElementImp extends AbstractElement implements EnhancedEleme
 	private EnhancedElementImp(String key, Locator locator) {
 		super(key, locator);
 	}
-
+	private FindElement intiFindElement(){
+		return new FindElement();
+	}
+	private WebElement initWebElement(long waitTime){
+		return intiFindElement().initializeWebElement(this.getKey(),this.getLocator(), waitTime);
+	}
+	private List<WebElement> initListOfWebElement(long waitTime){
+		return intiFindElement().initializeWebElementList(this.getKey(),this.getLocator(), waitTime);
+	}
 	private WebElement initWebElement(){
-		return new FindElement().initializeWebElement(this.getKey(),this.getLocator());
+		return intiFindElement().initializeWebElement(this.getKey(),this.getLocator());
 	}
-
 	private List<WebElement> initListOfWebElement(){
-		return new FindElement().initializeWebElementList(this.getKey(),this.getLocator());
+		return intiFindElement().initializeWebElementList(this.getKey(),this.getLocator());
 	}
-
 	@Override
 	public void scrollToElement(){
         JavascriptExecutor jsExecutor = (JavascriptExecutor) enhancedDriver;
@@ -54,13 +60,12 @@ public class EnhancedElementImp extends AbstractElement implements EnhancedEleme
 	}
 	@Override
 	public boolean waitForElementVisibility(Long seconds){
-		return initWebElement().isDisplayed();
+		return initWebElement(seconds).isDisplayed();
 	}
 	@Override
 	public boolean waitForElementToBePresent(Long seconds){
-		WebElement element1 = initWebElement();
-		WebElement element2 = initWebElement();
-		return element1.isDisplayed() && element2.isEnabled();
+		WebElement element = initWebElement(seconds);
+		return element.isDisplayed() && element.isEnabled();
 	}
 	@Override
 	public void click() {

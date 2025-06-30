@@ -1,6 +1,7 @@
 package com.web.selenium.webSelenium.init;
 
 import com.web.selenium.webSelenium.annotation.common.InitObject;
+import com.web.selenium.webSelenium.driver.EnhancedDriverImp;
 import com.web.selenium.webSelenium.session.SessionManager;
 import org.reflections.Reflections;
 
@@ -17,9 +18,7 @@ public class Inject {
 
         for (Class<?> clazz : initClasses) {
             System.out.println("Found @InitObject class: " + clazz.getName());
-
             SessionManager instance = (SessionManager) clazz.getDeclaredConstructor().newInstance();
-
 
             System.out.println(instance.init());
             // You can register this instance into a registry if you want
